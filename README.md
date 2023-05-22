@@ -519,9 +519,143 @@ ES6 之前的模块化规范有：
 
 
 
+# 第3章 ECMASript 7 新特性
+
+## 3.1. Array.prototype.includes
+Includes 方法用来检测数组中是否包含某个元素，返回布尔类型值
+
+
+## 3.2. 指数操作符
+在 ES7 中引入指数运算符「`**`」，用来实现幂运算，功能与 Math.pow 结果相同
 
 
 
+# 第4章 ECMASript 8 新特性
+
+## 4.1. async 和 await
+async 和 await 两种语法结合可以让异步代码像同步代码一样
+
+### 4.1.1. async 函数
+1. async 函数的返回值为 promise 对象，
+2. promise 对象的结果由 async 函数执行的返回值决定
+
+### 4.1.2. await 表达式
+1. await 必须写在 async 函数中
+2. await 右侧的表达式一般为 promise 对象
+3. await 返回的是 promise 成功的值
+4. await 的 promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理
+
+
+## 4.2. Object.values 和 Object.entries
+1. Object.values() 方法返回一个给定对象的所有可枚举属性值的数组
+2. Object.entries() 方法返回一个给定对象自身可遍历属性 `[key,value]` 的数组
+
+
+## 4.3. Object.getOwnPropertyDescriptors
+该方法返回指定对象所有自身属性的描述对象
+
+
+
+# 第5章 ECMASript 9 新特性
+
+## 5.1. Rest/Spread 属性
+Rest 参数与 spread 扩展运算符在 ES6 中已经引入，不过 ES6 中只针对于数组，在 ES9 中为对象提供了像数组一样的 rest 参数和扩展运算符
+```js
+function connect({ host, port, ...user }) {
+    console.log(host);
+    console.log(port);
+    console.log(user);
+}
+connect({
+    host: '127.0.0.1',
+    port: 3306,
+    username: 'root',
+    password: 'root',
+    type: 'master'
+});
+```
+
+
+## 5.2. 正则表达式命名捕获组
+ES9 允许命名捕获组使用符号『`?<name>`』，这样获取捕获结果可读性更强
+```js
+let str = '<a href="http://www.atguigu.com">尚硅谷</a>';
+const reg = /<a href="(?<url>.*)">(?<text>.*)<\/a>/;
+const result = reg.exec(str);
+console.log(result.groups.url);
+console.log(result.groups.text);
+```
+
+
+## 5.3. 正则表达式反向断言
+ES9 支持反向断言，通过对匹配结果前面的内容进行判断，对匹配进行筛选。
+```js
+// 声明字符串
+let str = 'JS5211314 你知道么 555 啦啦啦';
+// 正向断言
+const reg = /\d+(?=啦)/;
+const result = reg.exec(str);
+// 反向断言
+const reg1 = /(?<=么)\d+/;
+const result1 = reg.exec(str);
+console.log(result1);
+```
+
+
+## 5.4. 正则表达式 dotAll 模式
+正则表达式中点.匹配除回车外的任何单字符，标记『s』改变这种行为，允许行终止符出现
+```js
+let str = `
+<ul>
+ <li>
+ <a>肖生克的救赎</a>
+ <p>上映日期: 1994-09-10</p>
+ </li>
+ <li>
+ <a>阿甘正传</a>
+ <p>上映日期: 1994-07-06</p>
+ </li>
+</ul>`;
+// 声明正则
+const reg = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/gs;
+// 执行匹配
+// const result = reg.exec(str);
+let result;
+let data = [];
+while (result = reg.exec(str)) {
+    data.push({ title: result[1], time: result[2] });
+}
+// 输出结果
+console.log(data);
+```
+
+
+
+# 第6章 ECMASript 10 新特性
+
+## 6.1. Object.fromEntries
+
+## 6.2. trimStart 和 trimEnd
+
+## 6.3. Array.prototype.flat 与 flatMap
+
+## 6.4. Symbol.prototype.description
+
+
+
+# 第7章 ECMASript 11 新特性
+
+## 7.1. String.prototype.matchAll
+
+## 7.2. 类的私有属性
+
+## 7.3. Promise.allSettled
+
+## 7.4. 可选链操作符
+
+## 7.5. 动态 import 导入
+
+## 7.6. globalThis 对象
 
 
 
